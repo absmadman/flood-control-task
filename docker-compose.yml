@@ -1,5 +1,14 @@
 version: "3.8"
 services:
+  floodcontrol:
+    image: floodcontrol
+    container_name: floodcontrol
+    build:
+      context: .
+      dockerfile: Dockerfile
+    links:
+      - redis
+    env_file: .env
   redis:
     image: redis:7
     container_name: redis-db
@@ -8,5 +17,5 @@ services:
       - ./redis/data:/data
       - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
     ports:
-      - '6379:6379'
+      - "6379:6379"
     command: redis-server
