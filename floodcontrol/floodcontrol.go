@@ -9,14 +9,15 @@ import (
 
 // NewTokenBucket констуктор для TokenBucket
 func NewTokenBucket(tokens int, lastRefillTime time.Time) *TokenBucket {
-	maxTokens := 5
+	maxTokens := 3
 	refillTokens := 3
+	timeToRefill := 1
 	return &TokenBucket{
 		tokens:         tokens,
 		maxTokens:      maxTokens,
 		refillTokens:   refillTokens,
 		lastRefillTime: lastRefillTime,
-		timeToRefill:   3,
+		timeToRefill:   timeToRefill,
 	}
 }
 
@@ -40,12 +41,6 @@ func NewUser(UserID int64, tokens int, lastRefillTime time.Time) *User {
 		tokens:         tokens,
 		lastRefillTime: lastRefillTime,
 	}
-}
-
-// RedisVal структура для удобства хранения полей в Redis
-type RedisVal struct {
-	Tokens         int       `json:"tokens"`
-	LastRefillTime time.Time `json:"lastRefillTime"`
 }
 
 // GetData получает данные из Redis и складывает их в структуру User с помощью json.Unmarshall

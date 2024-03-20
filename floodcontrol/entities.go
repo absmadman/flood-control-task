@@ -20,6 +20,12 @@ type TokenBucket struct {
 	timeToRefill   int
 }
 
+// RedisVal структура для удобства хранения полей в Redis
+type RedisVal struct {
+	Tokens         int       `json:"tokens"`
+	LastRefillTime time.Time `json:"lastRefillTime"`
+}
+
 // FloodControl интерфейс, который нужно реализовать.
 // Рекомендуем создать директорию-пакет, в которой будет находиться реализация.
 type FloodControl interface {
